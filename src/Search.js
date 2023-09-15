@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
+import "bootstrap/dist/css/bootstrap.css";
+import "./Search.css";
 
 export default function Search() {
   const [city, setCity] = useState("");
@@ -11,6 +13,7 @@ export default function Search() {
     setWeather({
       temperature: response.data.main.temp,
       description: response.data.weather[0].description,
+      icon: `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`,
       humidity: response.data.main.humidity,
       wind: response.data.wind.speed,
     });
@@ -19,7 +22,7 @@ export default function Search() {
   function searchCity(event) {
     event.preventDefault();
     let apiKey = "2b6fdad0cbd018949c50c70f72250726";
-    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=imperial`;
     axios.get(apiUrl).then(displayWeather);
   }
 
@@ -34,7 +37,9 @@ export default function Search() {
         placeholder="Type a city..."
         onChange={updateCity}
       ></input>
-      <button type="submit">Search</button>
+      <button class="btn btn-primary" type="submit">
+        Search
+      </button>
     </form>
   );
 
@@ -42,11 +47,15 @@ export default function Search() {
     return (
       <div>
         {form}
+        <h3>{city}</h3>
         <ul>
-          <li>Temperature: {Math.round(weather.temperature)}°C</li>
+          <li>Temperature: {Math.round(weather.temperature)}°F</li>
           <li>Description: {weather.description}</li>
+          <li>
+            <img src={weather.icon} alt={weather.description} />
+          </li>
           <li>Humidity: {Math.round(weather.humidity)}%</li>
-          <li>Wind Speed: {Math.round(weather.wind)}km/h</li>
+          <li>Wind Speed: {Math.round(weather.wind)} mph</li>
         </ul>
       </div>
     );
