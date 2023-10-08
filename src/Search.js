@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.css";
 import "./Search.css";
+import Weather from "./Weather.js";
 
 export default function Search() {
   const [city, setCity] = useState("");
@@ -16,6 +17,8 @@ export default function Search() {
       icon: `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`,
       humidity: response.data.main.humidity,
       wind: response.data.wind.speed,
+      date: new Date(response.data.dt * 1000),
+      city: response.data.name,
     });
   }
 
@@ -32,31 +35,27 @@ export default function Search() {
 
   let form = (
     <form onSubmit={searchCity}>
-      <input
-        type="search"
-        placeholder="Type a city..."
-        onChange={updateCity}
-      ></input>
-      <button class="btn btn-primary" type="submit">
-        Search
-      </button>
+      <div className="row">
+        <div className="col-9">
+          <input
+            type="search"
+            placeholder="Type a city..."
+            class="form-control"
+            onChange={updateCity}
+          ></input>
+        </div>
+        <div className="col-3">
+          <input type="submit" value="Search" class="btn btn-primary"></input>
+        </div>
+      </div>
     </form>
   );
 
   if (loaded) {
     return (
-      <div>
+      <div className="container">
         {form}
-        <h3>{city}</h3>
-        <ul>
-          <li>Temperature: {Math.round(weather.temperature)}°F</li>
-          <li>Description: {weather.description}</li>
-          <li>
-            <img src={weather.icon} alt={weather.description} />
-          </li>
-          <li>Humidity: {Math.round(weather.humidity)}%</li>
-          <li>Wind Speed: {Math.round(weather.wind)} mph</li>
-        </ul>
+        <Weather data={weather} />
       </div>
     );
   } else {
