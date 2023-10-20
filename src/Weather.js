@@ -3,7 +3,7 @@ import Date from "./Date.js";
 
 export default function Weather(props) {
   return (
-    <div>
+    <div className="Weather">
       <div className="row">
         <div className="col-6">
           <h1 className="text-capitalize">{props.data.city}</h1>
