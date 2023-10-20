@@ -14,7 +14,7 @@ function App() {
             rel="noopener noreferrer"
           >
             GitHub
-          </a>
+          </a>{" "}
           and hosted on{" "}
           <a
             href="https://marvelous-licorice-80709c.netlify.app"
