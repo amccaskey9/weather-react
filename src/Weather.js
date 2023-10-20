@@ -16,10 +16,8 @@ export default function Weather(props) {
         <div className="col">
           <ul>
             <div className="flex-row">
-              <li>Temperature: {Math.round(props.data.temperature)}°F</li>
-              <li className="text-capitalize">
-                Description: {props.data.description}
-              </li>
+              <li>{Math.round(props.data.temperature)}°F</li>
+              <li className="text-capitalize">{props.data.description}</li>
             </div>
           </ul>
         </div>

@@ -3,6 +3,7 @@ import axios from "axios";
 import "bootstrap/dist/css/bootstrap.css";
 import "./Search.css";
 import Weather from "./Weather.js";
+import Forecast from "./Forecast.js";
 
 export default function Search() {
   const [city, setCity] = useState("");
@@ -12,20 +13,21 @@ export default function Search() {
   function displayWeather(response) {
     setLoaded(true);
     setWeather({
-      temperature: response.data.main.temp,
-      description: response.data.weather[0].description,
-      icon: `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`,
-      humidity: response.data.main.humidity,
+      temperature: response.data.temperature.current,
+      description: response.data.condition.description,
+      icon: response.data.condition.icon_url,
+      humidity: response.data.temperature.humidity,
       wind: response.data.wind.speed,
-      date: new Date(response.data.dt * 1000),
-      city: response.data.name,
+      date: new Date(response.data.time * 1000),
+      city: response.data.city,
+      coords: response.data.coordinates,
     });
   }
 
   function searchCity(event) {
     event.preventDefault();
-    let apiKey = "2b6fdad0cbd018949c50c70f72250726";
-    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=imperial`;
+    let apiKey = "f08a6a7fd3e944f30od1c4cc4b5b3tf6";
+    let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=imperial`;
     axios.get(apiUrl).then(displayWeather);
   }
 
@@ -56,6 +58,7 @@ export default function Search() {
       <div className="container">
         {form}
         <Weather data={weather} />
+        <Forecast coords={weather.coords} />
       </div>
     );
   } else {
