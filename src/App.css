@@ -1,0 +1,10 @@
+.App {
+  max-width: 768px;
+  margin: 10px;
+  padding: 12px;
+}
+
+footer {
+  margin: 25px;
+  text-align: center;
+}

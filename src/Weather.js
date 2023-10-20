@@ -9,7 +9,7 @@ export default function Weather(props) {
           <h1 className="text-capitalize">{props.data.city}</h1>
         </div>
         <div className="col">
-          Updated: <Date date={props.data.date} />
+          <Date date={props.data.date} />
         </div>
       </div>
       <div className="row">

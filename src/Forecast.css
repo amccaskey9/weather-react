@@ -1,0 +1,19 @@
+.Forecast {
+  display: flex;
+  justify-content: space-between;
+  font-size: 18px;
+  margin: 12px;
+  padding: 12px;
+}
+
+.Forecast-day {
+  font-weight: 300;
+}
+
+.Forecast-max {
+  color: #a72e23;
+}
+
+.Forecast-min {
+  color: #528fbb;
+}
